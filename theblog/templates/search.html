@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Search Results{% endblock %}
+{% block content %}
+
+
+<center> 
+   
+    {% if searched %}
+      <div class="jumbotron">
+      <h1>You searched for {{searched}} </h1>
+      <br>
+      {% for article in articles %}
+            <a href=""> {{article}} </a> <br>
+      {%endfor%}
+    {%else%}
+      <h1> Hey ! You forgot to search something</h1>
+    {%endif %}
+
+    </div>
+</center>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+{% if category_posts %}
+      <h1>{{ cats }}</h1>
+
+      <div class="jumbotron">
+        <ul>
+            {% for post in category_posts %}
+            <li><a href="{% url 'article-detail' post.pk%}">{{ post.title }}</a>
+              - {{post.category}}
+             - {{ post.author.first_name }}
+              {{ post.author.last_name }} -
+              {{post.post_date}} <small>
+
+                {% if user.is_authenticated %}
+                    - <a href="{% url 'update-post' post.pk%}">Edit</a>
+                    <a href="{% url 'delete-post' post.pk%}">Delete</a>
+                {% endif%}
+              </small><br>
+            {{ post.body|slice:":200"|safe }}</li>
+            {% endfor %}
+        </ul>
+  {% else %}
+    <h2>Sorry this page doesn't exists</h2>
+  {% endif %}
+  </div>
+<div >
+
+
+{% if category_posts.has_other_pages %}
+  <nav aria-label="Page naviagation container"></nav>
+    <ul class="pagination justify-content-center">
+      {% if category_posts.has_previous %}
+        <a class="btn btn-outline-danger" href="?page={{category_posts.previous_page_number}}" class="page-link">&laquo; Previous</a>
+      {% endif %}
+      </span>
+      <span>
+      {% if category_posts.has_next %}
+        <a class="btn btn-outline-success" href="?page={{ category_posts.next_page_number }}" class="page-link"> Next &raquo;</a>
+      {% endif %}
+    </ul>
+<!-- <div class="paginator">
+    <span>
+
+    </span> -->
+    {%endif%}
+</div>
+</div>
+
+{% endblock %}

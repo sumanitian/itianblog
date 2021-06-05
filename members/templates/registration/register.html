@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="container">
+<h1>Register</h1>
+<br>
+
+<div class="form-group">
+  <form method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+      <label class="form-label">{{ field.label }}</label>
+      {{field}}
+    {%endfor%}<br>
+    <button class="btn btn-success">Register</button>
+</div>
+</div>
+{% endblock %}
